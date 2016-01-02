@@ -88,7 +88,7 @@ int UDP_Init (void)
 	{
 		Sys_Error("Failed to allocate SOC_Buffer\n");
 	}
-	ret = SOC_Initialize(SOC_buffer, SOC_BUFFERSIZE);
+	ret = 1; //SOC_Initialize(SOC_buffer, SOC_BUFFERSIZE);
 	
 	if(ret != 0)
 	{
@@ -106,7 +106,7 @@ int UDP_Init (void)
 
 	if ((net_controlsocket = UDP_OpenSocket (5000)) == -1) //Passing 0 causes function to fail on 3DS
 	{
-		SOC_Shutdown();
+		//SOC_Shutdown();
 		free(SOC_buffer);
 		return -1;
 	}
@@ -195,7 +195,8 @@ int UDP_CloseSocket (int socket)
 	if (socket == net_broadcastsocket)
 		net_broadcastsocket = 0;
 	close (socket);
-	return SOC_Shutdown();
+	//return SOC_Shutdown();
+	return 0;
 }
 
 
